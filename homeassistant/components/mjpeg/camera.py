@@ -165,7 +165,12 @@ class MjpegCamera(Camera):
                 verify=self._verify_ssl,
             )
         else:
-            req = requests.get(self._mjpeg_url, stream=True, timeout=10)
+            req = requests.get(
+                self._mjpeg_url,
+                stream=True,
+                timeout=10,
+                verify=self._verify_ssl,
+            )
 
         with closing(req) as response:
             return extract_image_from_mjpeg(response.iter_content(102400))
